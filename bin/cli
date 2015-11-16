@@ -1,0 +1,73 @@
+#! /usr/bin/env node
+
+require('dotenv').load()
+var cli = require('cli')
+var pkg = require('../package.json')
+var mirror = require('../mirror')
+cli.enable('help', 'version', 'status')
+cli.setApp('mirror', pkg.version)
+var userOpts = [ 'u', 'Your Github Username', 'string' ]
+if (process.env.GITHUB_USER) {
+  var user = process.env.GITHUB_USER
+  userOpts.push(user)
+}
+var tokenOpts = [ 't', 'Your Github Access Token', 'string' ]
+var oauthOpts = [ 'o', 'Your Github Oauth Access Token', 'string' ]
+if (process.env.GITHUB_TOKEN) {
+  var token = process.env.GITHUB_TOKEN
+  tokenOpts.push(token)
+}
+if (process.env.GITHUB_OAUTH) {
+  var oauth = process.env.GITHUB_OAUTH
+  oauthOpts.push(token)
+}
+var options = cli.parse({
+  user: userOpts,
+  token: tokenOpts,
+  oauth: oauthOpts,
+  force: [ 'f', 'force push target branch', 'bool', false],
+  create: [ 'c', 'create target repo on Github', 'bool', false],
+})
+cli.main(function (args, options) {
+  var middleware = []
+  var command = this
+  command.debug(JSON.stringify(args))
+  args = args.length > 1 ? args : ['', '']
+  var source = args[0]
+  source = buildRepoObject(source)
+  var target = args[2] || args[1]
+  target = buildRepoObject(target)
+  var mirrorOpts = {
+    username: options.username,
+    host: 'github.com',
+    source: source,
+    target: target
+  }
+  if(options.token){
+    mirrorOpts.token = options.token
+  }
+  if(options.oauth){
+    mirrorOpts.oauth = options.oauth
+  }
+  if (options.create) {
+    mirrorOpts.create = options.create
+  }
+  command.debug(JSON.stringify(options))
+  mirror.fork(mirrorOpts)
+    .then(function (data) {
+      command.ok('mirror of ' + args[0] + ' to ' + (args[2] || args[1]) + ' was successful!')
+    })
+    .catch(function (err) {
+      command.error('mirror of ' + args[0] + ' to ' + (args[2] || args[1]) + ' failed.')
+      command.error(err)
+    })
+
+})
+
+function buildRepoObject (repoString) {
+  repoString = repoString.split('/')
+  return {
+    account: repoString[0],
+    repo: repoString[1]
+  }
+}
