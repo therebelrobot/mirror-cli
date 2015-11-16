@@ -1,0 +1,29 @@
+{
+  "name": "mirror-cli",
+  "version": "0.0.1",
+  "description": "Command line utility for 1:1 mirroring of Github repos",
+  "main": "bin/cli",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therebelrobot/mirror-cli.git"
+  },
+  "keywords": [
+    "mirror",
+    "clone",
+    "fork",
+    "manualfork",
+    "repo",
+    "repository",
+    "github",
+    "git"
+  ],
+  "author": "Trent Oswald <trentoswald@therebelrobot.com> (@therebelrobot)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/therebelrobot/mirror-cli/issues"
+  },
+  "homepage": "https://github.com/therebelrobot/mirror-cli#readme"
+}
