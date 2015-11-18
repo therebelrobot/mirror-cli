@@ -1,4 +1,4 @@
-# mirror
+# mirror-cli
 [![NPM](https://nodei.co/npm/mirror-cli.png?downloads=true)](https://nodei.co/npm/mirror-cli/)
 [![NPM](https://nodei.co/npm-dl/mirror-cli.png?months=3&height=2)](https://nodei.co/npm/mirror-cli/)
 

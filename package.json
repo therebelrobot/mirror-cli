@@ -1,6 +1,6 @@
 {
   "name": "mirror-cli",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Command line utility for 1:1 mirroring of Github repos",
   "main": "bin/cli",
   "bin": {
@@ -31,11 +31,9 @@
   },
   "homepage": "https://github.com/therebelrobot/mirror-cli#readme",
   "dependencies": {
-    "breeze": "^1.1.7",
     "cli": "^0.11.1",
     "dotenv": "^1.2.0",
-    "github": "^0.2.4",
-    "lodash": "^3.10.1"
+    "mirror-repo": "^1.1.0"
   },
   "devDependencies": {
     "chai": "^3.4.1",

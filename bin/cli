@@ -3,7 +3,7 @@
 require('dotenv').load()
 var cli = require('cli')
 var pkg = require('../package.json')
-var mirror = require('../mirror')
+var mirrorRepo = require('mirror-repo')
 cli.enable('help', 'version', 'status')
 cli.setApp('mirror', pkg.version)
 var userOpts = [ 'u', 'Your Github Username', 'string' ]
@@ -37,23 +37,23 @@ cli.main(function (args, options) {
   source = buildRepoObject(source)
   var target = args[2] || args[1]
   target = buildRepoObject(target)
-  var mirrorOpts = {
+  var mirrorRepoOpts = {
     username: options.username,
     host: 'github.com',
     source: source,
     target: target
   }
   if(options.token){
-    mirrorOpts.token = options.token
+    mirrorRepoOpts.token = options.token
   }
   if(options.oauth){
-    mirrorOpts.oauth = options.oauth
+    mirrorRepoOpts.oauth = options.oauth
   }
   if (options.create) {
-    mirrorOpts.create = options.create
+    mirrorRepoOpts.create = options.create
   }
   command.debug(JSON.stringify(options))
-  mirror.repo(mirrorOpts)
+  mirrorRepo.repo(mirrorRepoOpts)
     .then(function (data) {
       command.ok('mirror of ' + args[0] + ' to ' + (args[2] || args[1]) + ' was successful!')
     })
