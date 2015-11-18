@@ -38,7 +38,7 @@ cli.main(function (args, options) {
   var target = args[2] || args[1]
   target = buildRepoObject(target)
   var mirrorRepoOpts = {
-    username: options.username,
+    username: options.user,
     host: 'github.com',
     source: source,
     target: target

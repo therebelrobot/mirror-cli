@@ -1,6 +1,6 @@
 {
   "name": "mirror-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command line utility for 1:1 mirroring of Github repos",
   "main": "bin/cli",
   "bin": {
